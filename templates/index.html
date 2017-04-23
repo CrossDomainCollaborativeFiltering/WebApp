@@ -53,7 +53,7 @@
                     <li class="tab"><a id="listElementDocs" onclick="docsClicked()" class="active" href="#test1">Docs</a></li>
                     <li class="tab"><a id="listElementDemo" onclick="demoCliked()" href="#test2">Demo</a></li>
                 </ul>
-                
+
                 </div>
             </nav>
             
@@ -160,16 +160,16 @@
                 1. Non-Numeric data<br>
                 2. Numeric Data<br>
                 </b><br>
-                For the Clustering of NonNumeric Data tf-vectorization followed by KMeans clustering was done. For more information follows the documentation.
+                For the Clustering of NonNumeric Data tf-vectorization followed by KMeans clustering was done. For more information follow the documentation.
                 For the clustering of numeruic data simply KMeans of requisite attributes was done.
                 The clustered movies were kept by their movie ids in a separate cluster file.
                 <br>
-                The evaluator is required to select a <b>user</b> from an existing pool of users and a recommendation will be made from among the movies that the user has already watched and rated. Based on those recommendation an avearage rating will be calculated. This will show how good similar the movies in that cluster are. This is only an evaluation criteria. No new movies(movies the user has not watched) are recommended here.
+                The evaluator is required to select a <b>user</b> from an existing pool of users and a recommendation will be made from among the movies that the user has already watched and rated. Based on those recommendation an avearage rating will be calculated. This will show how good similar the movies in that cluster are. This is only an evaluation criteria. No new movies(movies the user has not watched) are recommended here.<br><br><br>
               </p>
             </div>
             <div class="card-action">
               <!--<a href="#">Demonstration</a>-->
-              <a class="waves-effect waves-light btn purple darken-4">Demonstration</a>
+              <a class="waves-effect waves-light btn purple darken-4" href="/clusterEvaluation/">Demonstration</a>
               <!--<a href="#">This is a link</a>-->
             </div>
           </div>
@@ -179,12 +179,19 @@
             <div class="card-content">
               <span class="card-title">Recommend New Movies</span>
               <p>
-
+                Here we recommend new movies to a user. The evaluator can select a <b>user</b> from an existing pool of users and recommend new movies for that user, movies which the user has not yet rated. <br>
+                Machine Learning is used for this portion of the recommender system. The Machine Learning model used is <b>Logistic Regression</b>. The movies that a specific user has seen is classified according to the ratings given by that user. The total number of classes is 4, ranging from the most loved movies to the most unliked ones. <br>
+                The features for the training set is the tf-vectors for the movies rated by the user. The labels are simply the ratings divided into 4 classes. <br>
+                For checking the <b>predicted rating </b>for any new movie, that movie is first tf-vectorized and a new rating is given to the movie based on the user. It simply answers the question: <b>How far will this movie be liked by the specific user?</b><br>
+                The system works in the following way:<br>
+                1. First the user is selected by the evaluator.<br>
+                2. The system is trained based on the existing ratings given by the user on his watched movies.<br>
+                3. A new movie is selected and it is given a rating based on the prediction of the Machine Learning model.<br>
               </p>
             </div>
             <div class="card-action">
               <!--<a href="#">Demonstration</a>-->
-              <a class="waves-effect waves-light btn purple darken-4">Demonstration</a>
+              <a class="waves-effect waves-light btn purple darken-4" href="/machineLearning/">Demonstration</a>
               <!--<a href="#">This is a link</a>-->
             </div>
           </div>
