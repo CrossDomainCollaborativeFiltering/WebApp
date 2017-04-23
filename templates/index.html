@@ -20,20 +20,24 @@
       <!--<script type="text/javascript" src="js/materialize.min.js"></script>-->
       <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+        <!-- Custom script tag for managing page layout-->
+        <script src=""></script>
       <header>
           <!--<div class="navbar-fixed">-->
-          <nav class="nav-extended navbar-fixed purple darken-4">
-            <div class="nav-wrapper">
-            <a href="#" class="brand-logo center">Cross Domain Collabortive Filtering</a>
-            
-            </div>
-            <div class="nav-content">
+          <nav class="nav-extended purple darken-4">
+                <div class="nav-wrapper">
+                <a href="https://github.com/CrossDomainCollaborativeFiltering" class="brand-logo center">Cross Domain Collaborative Filtering</a>
+                <!--<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>-->
+                </div>
+                <div class="nav-content">
                 <ul class="tabs tabs-transparent">
-                    <li class="tab"><a href="#test1">Docs</a></li>
-                    <li class="tab"><a href="#test4">Demo</a></li>
+                    <li class="tab"><a class="active" href="#test1">Docs</a></li>
+                    <li class="tab"><a href="#test2">Demo</a></li>
                 </ul>
-            </div>
-        </nav>
+                </div>
+            </nav>
+            <div id="docs" class="col s12">
+            
           <!--</div>-->
 
       </header>
@@ -47,7 +51,7 @@
               <p>Recommender Systems can be broadly classified into 3 categories. They are Content-Based Filtering, Collaborative Filtering and Hybrid Filtering. Content-Based Filtering is a technique of filtering where we use the raw data of the items considered for recommendation and recommend that to an end-user. Collaborative Filtering is a technique of filtering where we use the data from ther users who have used the item and rated the item and we recommend based on that. Hybrid as the name suggests is an amalgamation of both content based and Collabortive filtering.</p>
             </div> 
             <div class="card-action">
-              <a href="#">Read More</a>
+              <a href="demo">Read More</a>
               <!--<a href="#">This is a link</a>-->
             </div>
             </div>
@@ -117,7 +121,8 @@
             </div>
         </div>
       </div>
-
+      </div>
+      <div id="demo" class="col s12"></div><!-- This will be the demo section, so we can kind of do this in one go itself without using any routes-->
     </body>
     <footer class="page-footer purple darken-4">
           <div class="container">

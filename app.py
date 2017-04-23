@@ -3,10 +3,7 @@ app=Flask(__name__)
 
 @app.route("/")
 def index():
-    f=open("Non_NumericDataClustering.html", "r")
-    nonNumericClustering=f.read()
-    return render_template('index.html', nonNumericClustering=nonNumericClustering)
-
+    return render_template('index.html')
 
 if __name__=="__main__":
     app.run(debug=True)
