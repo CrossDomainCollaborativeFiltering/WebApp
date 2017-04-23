@@ -21,7 +21,7 @@
       <!-- Compiled and minified JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
         <!-- Custom script tag for managing page layout-->
-        <script src=""></script>
+        <!--<script type="text/javascript" src="static/js/pageLayout.js"></script>-->
       <header>
           <!--<div class="navbar-fixed">-->
           <nav class="nav-extended purple darken-4">
@@ -30,19 +30,40 @@
                 <!--<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>-->
                 </div>
                 <div class="nav-content">
+                  <script>
+                    function docsClicked()
+                    {
+                      // alert("helloworld")
+                      // var parent=document.getElementById('tabs');
+                      var demoElement=document.getElementById('demo');
+                      var docsElement=document.getElementById('docs');
+                      demoElement.style.display="none";
+                      docsElement.style.display="inline";
+
+                    }
+                    function demoCliked()
+                    { 
+                      var demoElement=document.getElementById('demo');
+                      var docsElement=document.getElementById('docs');
+                      demoElement.style.display="inline";
+                      docsElement.style.display="none";
+                    }
+                  </script>
                 <ul class="tabs tabs-transparent">
-                    <li class="tab"><a class="active" href="#test1">Docs</a></li>
-                    <li class="tab"><a href="#test2">Demo</a></li>
+                    <li class="tab"><a id="listElementDocs" onclick="docsClicked()" class="active" href="#test1">Docs</a></li>
+                    <li class="tab"><a id="listElementDemo" onclick="demoCliked()" href="#test2">Demo</a></li>
                 </ul>
+                
                 </div>
             </nav>
-            <div id="docs" class="col s12">
+            
             
           <!--</div>-->
 
       </header>
       <!--<div class="container">-->
       <!--</div>-->
+      <div id="docs" style="display: inline;" class="col s12">
       <div class="row">
           <div class="col s8 offset-m2">
               <div class="card">
@@ -122,23 +143,71 @@
         </div>
       </div>
       </div>
-      <div id="demo" class="col s12"></div><!-- This will be the demo section, so we can kind of do this in one go itself without using any routes-->
+      <div id="demo" style="display:none;" class="col s12">
+        <!-- Here we will have the code for showing the demo -->
+        <!--Helloworld-->
+        <!-- So for this as we know that we had 2 appraoches, the first one is an evaluation model where we make the clusters an find out for each user how good the recommendations by simply considering the 3 highest rated movies, going to the clusters of those movies and recommending all movies that fall in the same cluster and also rated by the same user.
+        We then avearge these ratings and show it to the user.-->
+        <div class="row">
+        <div class="col s6">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title ">Evaluate the Clusters</span>
+              <p>
+                Clustering of both datasets(sources: <b>MovieLens</b> and <b>Kaggle</b>) was done in order to group similar movies together. <br>
+                The datasets consisted of 2 types of data: <br>
+                <b>
+                1. Non-Numeric data<br>
+                2. Numeric Data<br>
+                </b><br>
+                For the Clustering of NonNumeric Data tf-vectorization followed by KMeans clustering was done. For more information follows the documentation.
+                For the clustering of numeruic data simply KMeans of requisite attributes was done.
+                The clustered movies were kept by their movie ids in a separate cluster file.
+                <br>
+                The evaluator is required to select a <b>user</b> from an existing pool of users and a recommendation will be made from among the movies that the user has already watched and rated. Based on those recommendation an avearage rating will be calculated. This will show how good similar the movies in that cluster are. This is only an evaluation criteria. No new movies(movies the user has not watched) are recommended here.
+              </p>
+            </div>
+            <div class="card-action">
+              <!--<a href="#">Demonstration</a>-->
+              <a class="waves-effect waves-light btn purple darken-4">Demonstration</a>
+              <!--<a href="#">This is a link</a>-->
+            </div>
+          </div>
+        </div>
+        <div class="col s6">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Recommend New Movies</span>
+              <p>
+
+              </p>
+            </div>
+            <div class="card-action">
+              <!--<a href="#">Demonstration</a>-->
+              <a class="waves-effect waves-light btn purple darken-4">Demonstration</a>
+              <!--<a href="#">This is a link</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+        </div><!-- This will be the demo section, so we can kind of do this in one go itself without using any routes-->
     </body>
-    <footer class="page-footer purple darken-4">
+    <!-- purple darken-4-->
+    <footer class="page-footer purple lighten-5">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">Research And Development NIIT University</h5>
-                <p class="grey-text text-lighten-4">Mentor: Dr. Prosenjit Gupta</p>
+                <h5 class="purple-text">Research And Development NIIT University</h5>
+                <p class="purple-text text-darken-4">Mentor: Dr. Prosenjit Gupta</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Members</h5>
+                <h5 class="purple-text">Members</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/RiflerRick">Rajdeep Mukherjee</a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/AkarshSrivastav">Akarsh Srivastav</a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/AmanJ0205">Aman Jain</a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/AshwinJd">Ashwin Jaydev</a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/bhargavashronit">Shronit Bhargava</a></li>
+                  <li><a class="purple-text text-darken-3" href="https://github.com/RiflerRick">Rajdeep Mukherjee</a></li>
+                  <li><a class="purple-text text-darken-3" href="https://github.com/AkarshSrivastav">Akarsh Srivastav</a></li>
+                  <li><a class="purple-text text-darken-3" href="https://github.com/AmanJ0205">Aman Jain</a></li>
+                  <li><a class="purple-text text-darken-3" href="https://github.com/AshwinJd">Ashwin Jaydev</a></li>
+                  <li><a class="purple-text text-darken-3" href="https://github.com/bhargavashronit">Shronit Bhargava</a></li>
                   <!--<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>-->
                 </ul>
               </div>
@@ -147,8 +216,8 @@
           <div class="footer-copyright">
             <div class="container">
             <!--© 2017 Copyright Text-->
-            <a class="grey-text text-lighten-4 left" href="#">references</a>
-            <a class="grey-text text-lighten-4 right" href="https://github.com/CrossDomainCollaborativeFiltering">github.com/CrossDomainCollaborativeFiltering</a>
+            <a class="purple-text text-darken-4 left" href="#">references</a>
+            <a class="purple-text text-darken-4 right" href="https://github.com/CrossDomainCollaborativeFiltering">github.com/CrossDomainCollaborativeFiltering</a>
             <!--<br>-->
             <!--<a class="grey-text text-lighten-4 left" href="#">references</a>-->
             </div>
