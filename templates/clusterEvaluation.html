@@ -1,0 +1,68 @@
+{% include 'head.html' %}
+<header>
+    <nav>
+    <div class="nav-wrapper purple darken-4">
+      <a href="#" class="brand-logo center">Cluster Evaluation</a>
+      <!--<ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>-->
+    </div>
+  </nav>
+</header>
+<script>
+     $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
+    <script>
+      function clicked()
+      {
+        var userid=document.getElementById('users').value;
+        // alert(userid)
+        if (userid==-1)
+        {
+          Materialize.toast('Please choose a valid user', 4000);
+        }
+        else
+        {
+          var route="showRecommendation/"+userid;
+          window.location.assign(route);
+        }
+        
+      }
+      </script>
+ <div class="row">
+        <div class="col s6 offset-s3">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Evaluate</span>
+              <!--<p> Select the user : </p>-->
+              <div class="row">
+                <p>Clusters have already been prepared in the Preprocessing step of the Recommender System. For Evaluating the quality of clusters, enter a userid from the pool of existing userids and evaluate the clusters made.</p><br>
+                <div class="row">
+                     <div class="input-field col s12">
+                        <select id="users">
+                        <option value="-1" disabled selected>Choose the userid of the user</option>
+                        {% for user in users %}
+                        <!--Mind what is being used here-->
+                        <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                        </select>
+                        <label>Select the user</label>
+                    </div>
+                    
+                </div>
+                </div>
+                <a id="recommend" onclick="clicked()" class="waves-effect waves-light btn">Recommend and Evaluate</a>
+                
+  </div>
+
+            </div>
+          </div>
+        </div>
+            
+
+</body>
+{% include 'foot.html' %}
