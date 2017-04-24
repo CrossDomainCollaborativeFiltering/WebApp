@@ -1,0 +1,72 @@
+{% include 'head.html' %}
+<header>
+    <nav>
+    <div class="nav-wrapper purple darken-4">
+      <a href="#" class="brand-logo center">Model Based Recommender</a>
+      <!--<ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>-->
+    </div>
+  </nav>
+</header>
+<script>
+     $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
+    <!--<script>
+      function clicked()
+      {
+        var movieid=document.getElementById('movies').value;
+        // alert(userid)
+        if (movieid==-1)
+        {
+          Materialize.toast('Please choose a valid movie', 4000); // 4000 ms to show the toast
+        }
+        else
+        {
+          var route="predictRating/"+movieid;
+          window.location.assign(route);
+        }
+        
+      }
+      </script>-->
+<div class="row">
+        <div class="col s6 offset-s3">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Predict New Movie Ratings</span>
+              <!--<p> Select the user : </p>-->
+              <div class="row">
+                <p>Now that you have trained the model you can provide it with a movie and it will predict the rating for that movie.</p>
+                <div class="row">
+                     <table class="centered responsive-table highlight">
+                      <thead>
+                        <tr>
+                          <!--<th>Movie ID</th>-->
+                            <th>Movie Name</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {% for movie in movieNames %}
+                        <tr>
+                          <td><a class="purple-text text-darken-4" href="predictRating/{{ allMovies[loop.index-1] }}">{{ movie }}<a></td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                    </table>
+                    
+                </div>
+                </div>
+                <a id="predict" onclick="clicked()" class="waves-effect waves-light btn">Rate</a>
+                
+  </div>
+
+            </div>
+          </div>
+        </div>
+</body>
+{% include 'foot.html' %}

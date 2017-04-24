@@ -11,5 +11,60 @@
     </div>
   </nav>
 </header>
+<script>
+     $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
+    <script>
+      function clicked()
+      {
+        var userid=document.getElementById('users').value;
+        // alert(userid)
+        if (userid==-1)
+        {
+          Materialize.toast('Please choose a valid user', 4000); // 4000 ms to show the toast
+        }
+        else
+        {
+          var route="trainLogRegModel/"+userid;
+          window.location.assign(route);
+        }
+        
+      }
+      </script>
+<div class="row">
+        <div class="col s6 offset-s3">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Predict New Movie Ratings</span>
+              <!--<p> Select the user : </p>-->
+              <div class="row">
+                <p>
+                    Model Based Collaborative Filtering is an appraoach which uses Machine Learning in order to recommend movies to users. <br> In here we use the present ratings of users to rate movies that the user has not watched. For details regarding the algorithm and its implementation see the documentation.
+                    <br>
+                    First you are required to select a user and train our model to fit the data.
+                    </p><br>
+                <div class="row">
+                     <div class="input-field col s12">
+                        <select id="users">
+                        <option value="-1" disabled selected>Choose the userid of the user</option>
+                        {% for user in users %}
+                        <!--Mind what is being used here-->
+                        <option value="{{ user }}">{{ user }}</option>
+                        {% endfor %}
+                        </select>
+                        <label>Select the user</label>
+                    </div>
+                    
+                </div>
+                </div>
+                <a id="train" onclick="clicked()" class="waves-effect waves-light btn">Train</a>
+                
+  </div>
 
+            </div>
+          </div>
+        </div>
+</body>
 {% include 'foot.html' %}

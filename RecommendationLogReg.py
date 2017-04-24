@@ -370,64 +370,54 @@ class Recommend:
         """
         return self.logr.predict(sample)
 
+class PredictMovies:
+    
+    def __init__(self):
+        self.dummy=-1
+        self.allUsers=None
+        self.tfvectorizer=None
+        self.recommend=None
 
-def main():
+    def prepareDataModelBased(self):
+        self.allUsers=AllUsers()
+        self.allUsers.getAllUserDetails()
+        # print ("all user details cached...")
+        cacheMovieCollection()
+        # print ("all movies cached...")
 
-    allUsers=AllUsers()
-    allUsers.getAllUserDetails()
-    movieid=0
-    print ("all user details cached...")
-    cacheMovieCollection()
-    print ("all movies cached...")
-    while True:
-        print ("Enter a user id to recommend to/ -1 to quit:")
-        userid=int(input())
-        if userid==-1:
-            return -1
-        user=User(allUsers.users, allUsers.movieID, allUsers.ratings)
-        print ("getting user details...")
+    def getMovieNames(self):
+        movieNames=[]
+        for row in movieCollection:
+            movieNames.append(row[2])
+        return movieNames
+
+    def trainModel(self, userid):
+        
+        user=User(self.allUsers.users, self.allUsers.movieID, self.allUsers.ratings)
+        # print ("getting user details...")
         user.getUserDetails(userid)
         document=Document(user.userRatedMovies)
-        print ("making documents...")
+        # print ("making documents...")
         document.makeDocuments()
-        tfvectorizer=TfVectorizer(document.documents, user.userRatings)
-        print ("vectorizing...")
-        tfvectorizer.vectorize()
-        tfvectorizer.defineLabels()
-        print ("training model...")
+        self.tfvectorizer=TfVectorizer(document.documents, user.userRatings)
+        # print ("vectorizing...")
+        self.tfvectorizer.vectorize()
+        self.tfvectorizer.defineLabels()
+        # print ("training model...")
         # print ("printing labels: "+str(tfvectorizer.labels))
-        recommend=Recommend(tfvectorizer.termDocMatrix,tfvectorizer.labels)
-        recommend.trainModel()
-        print ("model trained...for user")
-        # print ("Enter true movie id to check likeness.:")
-        print ("checking for all users...")
-        liked=0
-        notLiked=0
-        loved=0
-        movieid=0
-        # the true movie ids are supplied here
-        while movieid<10179:
-            # movieid=int(input())
-            sampleDocument=SampleDocument()
-            sampleDocument.makeDocuments(movieid)
-            print ("sample document made...")
-            sampleTfVectorizer=SampleTfVectorizer(sampleDocument.documents, tfvectorizer.trainModel)
-            termDocMatrix=sampleTfVectorizer.vectorize()
-            prediction=recommend.predict(termDocMatrix)
-            if prediction==4:
-                loved+=1
-            elif prediction==3:
-                liked+=1
-            else:
-                notLiked+=1
-            # print ("liked" if prediction==1 else "not liked")
+        self.recommend=Recommend(self.tfvectorizer.termDocMatrix,self.tfvectorizer.labels)
+        self.recommend.trainModel()
+        # print ("model trained...for user")
 
-            movieid+=1
-        
-        print ("loved: "+str(loved))
-        print ("liked: "+str(liked))
-        print ("unliked: "+str(notLiked))
+    def predict(self, movieid):
 
+        sampleDocument=SampleDocument()
+        sampleDocument.makeDocuments(movieid)
+        # print ("sample document made...")
+        sampleTfVectorizer=SampleTfVectorizer(sampleDocument.documents, self.tfvectorizer.trainModel)
+        termDocMatrix=sampleTfVectorizer.vectorize()
+        prediction=self.recommend.predict(termDocMatrix)
+        return prediction
 
-if __name__=="__main__":
-    main()
+# if __name__=="__main__":
+#     main()

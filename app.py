@@ -1,11 +1,17 @@
 from Querying import PrepareData, Querying, ComputeResults
-from returnAllMovies import AllMovies
-from returnAllUsers import AllUsers
+from returnAllMovies import MovieDataSet
+from returnAllUsers import UserDataSet
+from RecommendationLogReg import AllUsers, User, Document, TfVectorizer, SampleDocument, SampleTfVectorizer, Recommend, PredictMovies
 # from Querying import returnAllUsers, returnAllMovies
 
 # the data has to be prepared
-obj1=ComputeResults()
-dataObject=obj1.prepare()
+obj0=ComputeResults()
+dataObject=obj0.prepare()
+
+obj1=PredictMovies()
+obj1.prepareDataModelBased()
+
+movieNames=obj1.getMovieNames()
 
 from flask import Flask, render_template
 app=Flask(__name__)
@@ -16,24 +22,46 @@ def index():
 
 @app.route('/clusterEvaluation/')
 def clusterEvaluation():
-    obj2=AllUsers()
+    obj2=UserDataSet()
+    # print (type(obj2))
     allUsers=obj2.users()
     return render_template('clusterEvaluation.html', users=allUsers)
 
 @app.route('/machineLearning/')
 def machineLearning():
-    return render_template('mlRecommender.html')
+    obj2=UserDataSet()
+    allUsers=obj2.users()
+    # obj3=AllMovies()
+    # allMovies=obj3.movies()
+    return render_template('mlRecommender.html', users=allUsers)
+
+@app.route('/machineLearning/trainLogRegModel/<userid>')
+def trainModel(userid):
+    userid=int(userid)
+    obj3=MovieDataSet()
+    allMovies=obj3.movies()
+    obj1.trainModel(userid)
+    return render_template('/predictMovieRating.html', movieNames=movieNames, allMovies=allMovies)
 
 @app.route('/clusterEvaluation/showRecommendation/<userid>')
 def showRecommendation(userid):
     userid=int(userid)
     # this will show the recommendation to the current user and render the same template with the results
-    recommendation=obj1.computeAverageRatings(userid, dataObject)
+    recommendation=obj0.computeAverageRatings(userid, dataObject)
     # here recommendation is a tuple that stores the following data: (averageRatings, recMovieNames, ratedMovieNames) 
     # averageRatings is a list of 3 ratings, recMovieNames are the moviesRecommended and ratedMovieNames are the movie names of the movies that the user had watched.
     for i in range(len(recommendation[0])):
         recommendation[0][i]=round(recommendation[0][i],2)
     return render_template('clusterEvaluationResults.html', averageRatings=recommendation[0], recMovieNames=recommendation[1], ratedMovieNames=recommendation[2])
+
+@app.route('/machineLearning/trainLogRegModel/predictRating/<movieid>')
+def predictMovieRating(movieid):
+    movieid=int(movieid)
+    prediction=obj1.predict(movieid)
+    print ("prediction --------------------------"+str(prediction))
+    prediction=int(prediction[0])
+    print ("preiction now:----------------------------------------"+str(prediction))
+    render_template('showPrediction.html', prediction=prediction)
 
 if __name__=="__main__":
     app.run(debug=True)

@@ -1,4 +1,4 @@
-class AllUsers:
+class UserDataSet:
     
     def __init__(self):
         self.dummy=-1

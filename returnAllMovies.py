@@ -1,4 +1,4 @@
-class AllMovies:
+class MovieDataSet:
     def __init__(self):
         self.dummy=-1
 
