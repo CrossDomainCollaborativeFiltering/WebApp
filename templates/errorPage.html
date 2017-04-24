@@ -1,0 +1,59 @@
+{% include 'head.html' %}
+<header>
+    <nav>
+    <div class="nav-wrapper purple darken-4">
+      <a href="#" class="brand-logo center">Oh Snap!!!</a>
+      <!--<ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>-->
+    </div>
+  </nav>
+</header>
+<script>
+     $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
+    <!--<script>
+      function clicked()
+      {
+        var movieid=document.getElementById('movies').value;
+        // alert(userid)
+        if (movieid==-1)
+        {
+          Materialize.toast('Please choose a valid movie', 4000); // 4000 ms to show the toast
+        }
+        else
+        {
+          var route="predictRating/"+movieid;
+          window.location.assign(route);
+        }
+        
+      }
+      </script>-->
+<div class="row">
+        <div class="col s6 offset-s3">
+          <div class="card">
+            <div class="card-content">
+              <span class="card-title">Well this was unexpected</span>
+              <!--<p> Select the user : </p>-->
+              <div class="row">
+                <p>
+                    It seems you just tried to do something unorthodox. This system works best when you are not trying to fiddle with the url of the browser. You can simply use the mouse to browse through evaluating the system. Doing something unorthodox is good, helps us know something more about something else however there are other websites available on the net to try stuff out. <br>
+                    However for this system we would like you to follow protocol. Bending rules is definitely appealing however in some places its best to follow them for the greater good of the system for which the rules are built.
+                    <br>
+                    If you read thorugh all this, <b>Great</b>, couldn't hurt. All we wanted to say is go back and follow the sequence of the system itself.
+                </p>
+                
+                </div>
+                <!--<a id="predict" onclick="clicked()" class="waves-effect waves-light btn">Rate</a>-->
+                
+  </div>
+
+            </div>
+          </div>
+        </div>
+</body>
+{% include 'foot.html' %}

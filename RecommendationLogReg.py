@@ -392,7 +392,8 @@ class PredictMovies:
         return movieNames
 
     def trainModel(self, userid):
-        
+        if userid not in self.allUsers.users:
+            return -1
         user=User(self.allUsers.users, self.allUsers.movieID, self.allUsers.ratings)
         # print ("getting user details...")
         user.getUserDetails(userid)
@@ -411,6 +412,8 @@ class PredictMovies:
 
     def predict(self, movieid):
 
+        if movieid not in self.allUsers.movieID:
+            return -1
         sampleDocument=SampleDocument()
         sampleDocument.makeDocuments(movieid)
         # print ("sample document made...")
@@ -418,6 +421,19 @@ class PredictMovies:
         termDocMatrix=sampleTfVectorizer.vectorize()
         prediction=self.recommend.predict(termDocMatrix)
         return prediction
+
+# def main():
+#     obj=PredictMovies()
+#     obj.prepareDataModelBased()
+#     print ("data prepared")
+#     obj.trainModel(78)
+#     print ("model trained")
+#     while True:
+#         print("enter a movieid")
+#         movieid=int (input())
+#         a=obj.predict(movieid)
+#         print ("prediction : "+str(a))
+
 
 # if __name__=="__main__":
 #     main()

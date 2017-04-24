@@ -297,6 +297,8 @@ class ComputeResults:
         averageRatings=[]
         ratedMovieNames=[]
         recMovieNames=[]
+        if userid not in self.dataObj.users:
+            return -1
         # while True:
         # print("Enter a userid, -1 to quit-------------------------------------------------------------")
         # userid=int(input())

@@ -11,34 +11,28 @@
     </div>
   </nav>
 </header>
-<script>
-     $(document).ready(function() {
-    $('select').material_select();
-  });
-    </script>
-    <!--<script>
-      function clicked()
-      {
-        var movieid=document.getElementById('movies').value;
-        // alert(userid)
-        if (movieid==-1)
-        {
-          Materialize.toast('Please choose a valid movie', 4000); // 4000 ms to show the toast
-        }
-        else
-        {
-          var route="predictRating/"+movieid;
-          window.location.assign(route);
-        }
-        
-      }
-      </script>-->
+
 <div class="row">
         <div class="col s6 offset-s3">
           <div class="card">
             <div class="card-content">
               <span class="card-title">Predict New Movie Ratings</span>
               <!--<p> Select the user : </p>-->
+              <br>
+              <div style="margin: 0 0 0 45%" class="preloader-wrapper small active">
+                <div class="spinner-layer spinner-blue">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="movieList" style="display:none;">
+              
+
               <div class="row">
                 <p>Now that you have trained the model you can provide it with a movie and it will predict the rating for that movie.</p>
                 <div class="row">
@@ -63,10 +57,17 @@
                 </div>
                 <a id="predict" onclick="clicked()" class="waves-effect waves-light btn">Rate</a>
                 
-  </div>
+            </div>
 
             </div>
           </div>
         </div>
+        <script>
+     $(document).ready(function() {
+    $('select').material_select();
+    $('.preloader-wrapper').css("display","none");
+    $('#movieList').css("display","inline");
+  });
+    </script> 
 </body>
 {% include 'foot.html' %}

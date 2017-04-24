@@ -40,7 +40,10 @@ def trainModel(userid):
     userid=int(userid)
     obj3=MovieDataSet()
     allMovies=obj3.movies()
-    obj1.trainModel(userid)
+    a=obj1.trainModel(userid)
+    if a==-1:
+        # it means that the evaluator has entered a bogus user id through the system
+        return render_template('/errorPage.html')
     return render_template('/predictMovieRating.html', movieNames=movieNames, allMovies=allMovies)
 
 @app.route('/clusterEvaluation/showRecommendation/<userid>')
@@ -48,6 +51,8 @@ def showRecommendation(userid):
     userid=int(userid)
     # this will show the recommendation to the current user and render the same template with the results
     recommendation=obj0.computeAverageRatings(userid, dataObject)
+    if recommendation==-1:
+        return render_template('/errorPage.html')
     # here recommendation is a tuple that stores the following data: (averageRatings, recMovieNames, ratedMovieNames) 
     # averageRatings is a list of 3 ratings, recMovieNames are the moviesRecommended and ratedMovieNames are the movie names of the movies that the user had watched.
     for i in range(len(recommendation[0])):
@@ -58,10 +63,14 @@ def showRecommendation(userid):
 def predictMovieRating(movieid):
     movieid=int(movieid)
     prediction=obj1.predict(movieid)
-    print ("prediction --------------------------"+str(prediction))
+    if prediction==-1:
+        return render_template('/errorPage.html')
     prediction=int(prediction[0])
-    print ("preiction now:----------------------------------------"+str(prediction))
-    render_template('showPrediction.html', prediction=prediction)
+    return render_template('showPrediction.html', prediction=prediction)
+
+# TODO for this app:
+# Add loading icon when all movies are loaded onto screen for the route '/machineLearning/trainLogRegModel/<userid>'. 
+# Make sure the system is fail safe. That is the user should not be able to enter any weird values into the system.
 
 if __name__=="__main__":
     app.run(debug=True)
